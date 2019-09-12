@@ -1,0 +1,26 @@
+{
+  "mybatis": [
+    {
+      "name":"db1",
+      "mapperLocations": ["classpath:mapper/m1/*", "classpath:mapper/m2/*"],
+      "basePackage": ["test.orm.source.dao"],
+      "typeAliasesPackage": ["test.orm.source.entity"],
+      "dataSource": {
+        "url": "jdbc:mysql://10.93.165.250:3306/zpj-mybatis-test01?characterEncoding=UTF-8&serverTimezone=UTC",
+        "username": "mybatis",
+        "password": "2wKSDH8_293BYjk",
+        "driverClass": "com.mysql.jdbc.Driver"
+      }
+    },
+    {
+      "name":"db2",
+      "basePackage": ["test.orm.source.mapper","test.orm.source.mapper2"],
+      "dataSource": {
+        "url": "jdbc:mysql://10.93.165.250:3306/zpj-mybatis-test01?characterEncoding=UTF-8&serverTimezone=UTC",
+        "username": "mybatis",
+        "password": "2wKSDH8_293BYjk",
+        "driverClass": "com.mysql.jdbc.Driver"
+      }
+    }
+  ]
+}

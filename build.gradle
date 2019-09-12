@@ -1,0 +1,75 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.8.1'
+    }
+}
+plugins {
+    id 'idea'
+    id 'java'
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.0'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.3.0'
+}
+apply plugin: 'com.novoda.bintray-release'
+
+ext {
+    VS_CORE_VERSION = '1.3.3'
+    VS_WEB_VERSION = '1.0.2'
+    VERTX_VERSION = '3.8.1'
+    DRUID_VERSION = '1.1.20'
+
+    mybatisVersion = '3.5.0'
+    mybatisSpringVersion = '2.0.2'
+    kotlin_version = "1.3.21"
+    jUnit_version = "4.12"
+}
+repositories {
+    jcenter()
+    jcenter { url "https://dl.bintray.com/kavi/vs" }
+}
+
+mainClassName = ''
+dependencies {
+    compile "tech.kavi:vs-core:$VS_CORE_VERSION"
+    compile "tech.kavi:vs-web:$VS_WEB_VERSION"
+    compile "com.alibaba:druid:$DRUID_VERSION"
+
+    compile "org.springframework:spring-jdbc:5.1.4.RELEASE"
+    compile "org.mybatis:mybatis:$mybatisVersion"
+    compile "org.mybatis:mybatis-spring:$mybatisSpringVersion"
+    
+    
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile "junit:junit:$jUnit_version"
+}
+
+compileJava {
+    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+}
+
+version = "1.0.1"
+jar {
+    from(compileJava.outputs)
+}
+
+publish {
+    repoName = 'vs'
+    userOrg = 'kavi'
+    groupId = 'tech.kavi'
+    artifactId = 'vs-mybatis'
+    publishVersion = '1.0.1'
+    desc = 'Vertx with Spring Integration by kotlin'
+    website = 'https://vs.kavi.tech'
+}
